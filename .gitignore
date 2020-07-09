@@ -1,4 +1,4 @@
 .idea/**
- *.iml
-
- local_db/**
+*.iml
+local_db/**
+**/__pycache__

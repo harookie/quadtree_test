@@ -3,20 +3,30 @@ from pyspark import SparkContext
 import mercantile
 import sqlite3
 from sqlite3 import Cursor, Connection
-from configuration import Configuration
+from com.skt.tango.analyze.quadtree_test.configuration import Configuration
+import contextlib
 
-"""
-sc = SparkContext(master="local", appName="first app")
 
-df = sc.parallelize(range(0, 10))
-print(df.collect())
-sc.stop()
-"""
+def test_spark():
+    sc = SparkContext(master="local", appName="first app")
+    df = sc.parallelize(range(0, 10))
+    print(df.collect())
+    sc.stop()
+
+
+# test_spark()
+
+configuration: Configuration = Configuration()
 cursor: Cursor
 db_connection: Connection
-with sqlite3.connect('example.db') as db_connection,\
-        db_connection.cursor() as cursor:
-    cursor.execute()
+with sqlite3.connect('local_db/example.db') as db_connection, \
+        contextlib.closing(db_connection.cursor()) as cursor:
+    cursor.execute(configuration.CREATE_TILE_INF)
+    cursor.execute(configuration.INSERT_TO_TILE_INF)
+    cursor.execute(configuration.SELECT_TILE_INF)
+    for row in cursor:
+        print(row)
+    db_connection.commit()
 
 zoom_lv = 21
 parent_quadkey = "13211032031020"
