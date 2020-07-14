@@ -9,5 +9,18 @@ INSERT INTO TILE_INF(LV, TILE_ID, GEOHASH, TOP_LEFT_X, TOP_LEFT_Y, BOTTOM_RIGHT_
 VALUES(:lv, :tile_id, :geohash, :top_left_x, :top_left_y, :bottom_right_x, :bottom_right_y, :center_x, :center_y)""".\
         strip()
 
-    SELECT_TILE_INF = """
-SELECT * FROM TILE_INF""".strip()
+    CREATE_KPI_INF = """
+CREATE TABLE IF NOT EXISTS KPI_INF
+(KPI_NAME TEXT, VENDOR TEXT, LV INTEGER, THRESHOLD REAL)""".strip()
+
+    INSERT_TO_KPI_INF = """
+INSERT INTO KPI_INF(KPI_NAME, VENDOR, LV, THRESHOLD)
+VALUES(:kpi_name, :vendor, :lv, :threshold)""".strip()
+
+    CREATE_TILE_KPI_INF = """
+CREATE TABLE IF NOT EXISTS KPI_INF
+(EVENT_TIME, LV, TILE_ID, KPI_VALUE)""".strip()
+
+    INSERT_TO_TILE_KPI_INF = """
+INSERT INTO TILE_KPI_INF(EVENT_TIME, LV, TILE_ID, KPI_VALUE)
+VALUES(:event_time, :lv, :tile_id, :kpi_value)""".strip()
