@@ -8,8 +8,8 @@ import mercantile
 from mercantile import Tile
 import sqlite3
 from sqlite3 import Cursor, Connection
-from com.skt.tango.analyze.quadtree_test.configuration import Configuration
-from com.skt.tango.analyze.quadtree_test.configuration import LV_COLOR_MAP
+from configuration import Configuration
+from configuration import LV_COLOR_MAP
 import contextlib
 
 

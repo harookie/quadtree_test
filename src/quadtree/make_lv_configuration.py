@@ -2,7 +2,7 @@ import sqlite3
 from sqlite3 import Cursor, Connection
 import contextlib
 
-from com.skt.tango.analyze.quadtree_test.configuration import Configuration
+from configuration import Configuration
 
 
 class KpiConfiguration:
